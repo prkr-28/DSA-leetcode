@@ -8,7 +8,7 @@ class Solution {
 
         for (int right = 0; right < n; right++) {
             currSum += nums[right];
-            while ((long) nums[right] * (right - left + 1) - currSum > k) {
+            if ((long) nums[right] * (right - left + 1) - currSum > k) {
                 currSum -= nums[left]; // Shrink the window from the left
                 left++;
             }
