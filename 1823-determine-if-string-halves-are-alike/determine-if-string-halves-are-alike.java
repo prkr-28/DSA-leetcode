@@ -4,16 +4,12 @@ class Solution {
         int c1=0;
         int c2=0;
         for(int i=0;i<arr.length/2;i++){
-            if(arr[i]-'a'==0||arr[i]-'e'==0||arr[i]-'i'==0||
-            arr[i]-'o'==0||arr[i]-'u'==0||arr[i]-'A'==0||arr[i]-'E'==0||
-            arr[i]-'I'==0||arr[i]-'O'==0||arr[i]-'U'==0){
+            if(isvovel(arr[i])){
                 c1++;
             }
         }
         for(int i=arr.length/2;i<arr.length;i++){
-            if(arr[i]-'a'==0||arr[i]-'e'==0||arr[i]-'i'==0||
-            arr[i]-'o'==0||arr[i]-'u'==0||arr[i]-'A'==0||arr[i]-'E'==0||
-            arr[i]-'I'==0||arr[i]-'O'==0||arr[i]-'U'==0){
+            if(isvovel(arr[i])){
                 c2++;
             }
         }
@@ -22,5 +18,13 @@ class Solution {
         }else{
             return false;
         }
+    }
+    public static boolean isvovel(char ch){
+        if(ch-'a'==0||ch-'e'==0||ch-'i'==0||
+            ch-'o'==0||ch-'u'==0||ch-'A'==0||ch-'E'==0||
+            ch-'I'==0||ch-'O'==0||ch-'U'==0){
+            return true;
+        }
+        return false;
     }
 }
