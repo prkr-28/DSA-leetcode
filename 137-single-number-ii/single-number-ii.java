@@ -1,11 +1,8 @@
 class Solution {
     public int singleNumber(int[] nums) {
         Arrays.sort(nums);
-        for(int i=1;i<nums.length;i++){
-            if(nums[i]==nums[i-1]){
-                i=i+2;
-            }
-            else{
+        for(int i=1;i<nums.length;i=i+3){
+            if(nums[i]!=nums[i-1]){
                 return nums[i-1];
             }
         }
