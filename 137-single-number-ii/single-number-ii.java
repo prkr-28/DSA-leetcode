@@ -1,17 +1,14 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        int result=0;
-        for(int k=0;k<=31;k++){
-            int countones=0;
-            for(int i=0;i<nums.length;i++){
-                if((nums[i]&(1<<k))!=0){
-                    countones++;
-                }
+        Arrays.sort(nums);
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]==nums[i-1]){
+                i=i+2;
             }
-            if(countones%3!=0){
-                result=result|(1<<k);
+            else{
+                return nums[i-1];
             }
         }
-        return result;
+        return nums[nums.length-1];
     }
 }
