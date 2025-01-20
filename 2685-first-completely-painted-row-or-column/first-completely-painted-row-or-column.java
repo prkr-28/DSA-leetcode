@@ -3,9 +3,9 @@ class Solution {
         int n=mat.length;
         int m=mat[0].length;
 
-        Map<Integer,Integer>map=new HashMap<>();
-        for(int i=0;i<arr.length;i++){
-            map.put(arr[i],i);
+        int[] map = new int[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            map[arr[i]] = i;
         }
 
         int bestidx=Integer.MAX_VALUE;
@@ -13,7 +13,7 @@ class Solution {
             int lastidx=0;
             for(int col=0;col<m;col++){
                 int val=mat[row][col];
-                int idx=map.get(val);
+                int idx=map[val];
                 lastidx=Math.max(lastidx,idx);
             }
             bestidx=Math.min(bestidx,lastidx);
@@ -22,7 +22,7 @@ class Solution {
             int lastidx=0;
             for(int row=0;row<n;row++){
                 int val=mat[row][col];
-                int idx=map.get(val);
+                int idx=map[val];
                 lastidx=Math.max(lastidx,idx);
             }
             bestidx=Math.min(bestidx,lastidx);
