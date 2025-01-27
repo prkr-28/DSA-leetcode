@@ -5,22 +5,27 @@ class Solution {
         }
         StringBuilder result=new StringBuilder();
         int n=num.length();
+        Stack<Character>s=new Stack<>();
         for(int i=0;i<n;i++){
-            while(result.length()>0&&result.charAt(result.length()-1)>num.charAt(i)&&k>0){
-                result.deleteCharAt(result.length()-1);
+            while(!s.isEmpty()&&k>0&&s.peek()-'0'>num.charAt(i)-'0'){
+                s.pop();
                 k--;
             }
-            if(result.length()>0||num.charAt(i)!='0'){
-                result.append(num.charAt(i));
+            if(s.size()>0||num.charAt(i)!='0'){
+                s.push(num.charAt(i));
             }
         }
-        while(result.length()>0&&k>0){
-            result.deleteCharAt(result.length()-1);
+        while(!s.isEmpty()&&k>0){
+            s.pop();
             k--;
         }
-        if(result.length()==0){
+        if(s.isEmpty()){
             return "0";
         }
+        while(!s.isEmpty()){
+            result.append(s.pop());
+        }
+        result=result.reverse();
         return result.toString();
     }
 }
