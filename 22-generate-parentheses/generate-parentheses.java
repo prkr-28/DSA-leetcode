@@ -16,6 +16,7 @@ class Solution {
         str=str.substring(0,str.length()-1);
         str+=')';
         generate(n,length+1,list,str);
+        str=str.substring(0,str.length()-1);
     }
     public static boolean isvalid(String s){
         int sum=0;
