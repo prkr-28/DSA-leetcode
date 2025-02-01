@@ -18,31 +18,19 @@ class Solution {
         generate(n,length+1,list,str);
     }
     public static boolean isvalid(String s){
-        Stack<Character>st=new Stack<>();
+        int sum=0;
         for(int i=0;i<s.length();i++){
             char ch=s.charAt(i);
-            if(ch=='('||ch=='{'||ch=='['){
-                st.push(ch);
+            if(ch=='('){
+                sum++;
             }
             else{
-                if(st.isEmpty()){
-                    return false;
-                }
-                if(st.peek()=='('&&ch==')'
-                ||st.peek()=='{'&&ch=='}'
-                ||st.peek()=='['&&ch==']'){
-                    st.pop();
-                }
-                else{
-                    return false;
-                }
+                sum--;
+            }
+            if(sum<0){
+                return false;
             }
         }
-        if(st.isEmpty()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return sum==0;
     }
 }
