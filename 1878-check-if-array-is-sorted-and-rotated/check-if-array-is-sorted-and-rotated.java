@@ -1,28 +1,15 @@
 class Solution {
     public boolean check(int[] nums) {
-        int n=nums.length;
-        int[] sorted=new int[n];
-        for(int i=0;i<n;i++){
-            int idx=0;
-            for(int j=i;j<n;j++){
-                sorted[idx]=nums[j];
-                idx++;
-            }
-            for(int k=0;k<i;k++){
-                sorted[idx]=nums[k];
-                idx++;
-            }
-            boolean flag=true;
-            for(int l=1;l<n;l++){
-                if(sorted[l-1]>sorted[l]){
-                    flag= false;
-                    break;
-                }
-            }
-            if(flag==true){
-                return true;
+        int count=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>nums[(i+1)%nums.length]){
+                count++;
             }
         }
-        return false;
+        // if(nums[nums.length-1]>nums[0]){
+        //     count++;
+        // }
+
+        return count<=1;
     }
 }
