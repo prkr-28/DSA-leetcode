@@ -14,7 +14,7 @@ class Solution {
         }
         temp.add(nums[i]);
         subset(nums,i+1,temp);
-        temp.remove(temp.get(temp.size()-1));
+        temp.remove(temp.size()-1);
         subset(nums,i+1,temp);
     }
 }
