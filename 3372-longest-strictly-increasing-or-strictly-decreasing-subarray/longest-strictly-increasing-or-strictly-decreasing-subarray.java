@@ -12,8 +12,7 @@ class Solution {
             else{
                 inc=1;
             }
-        }
-        for(int i=1;i<nums.length;i++){
+
             if(nums[i-1]>nums[i]){
                 dec++;
                 maxdec=Math.max(dec,maxdec);
@@ -22,6 +21,15 @@ class Solution {
                 dec=1;
             }
         }
+        // for(int i=1;i<nums.length;i++){
+        //     if(nums[i-1]>nums[i]){
+        //         dec++;
+        //         maxdec=Math.max(dec,maxdec);
+        //     }
+        //     else{
+        //         dec=1;
+        //     }
+        // }
         return Math.max(maxinc,maxdec);
     }
 }
