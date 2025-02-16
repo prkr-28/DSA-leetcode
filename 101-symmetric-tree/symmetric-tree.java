@@ -15,31 +15,15 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        ArrayList<Integer>arr1=new ArrayList<>();
-        ArrayList<Integer>arr2=new ArrayList<>();
-        lefttrav(root.left,arr1);
-        righttrav(root.right,arr2);
-        if(arr1.equals(arr2)){
-            return true;
-        }
-        return false;
+       return symmetric(root.left,root.right);
     }
-    public void lefttrav(TreeNode root,ArrayList<Integer>arr){
-        if(root==null){
-            arr.add(-1);
-            return;
+    public boolean symmetric(TreeNode left,TreeNode right){
+        if(left==null||right==null){
+            return left==right;
         }
-        arr.add(root.val);
-        lefttrav(root.left,arr);
-        lefttrav(root.right,arr);
-    }
-    public void righttrav(TreeNode root,ArrayList<Integer>arr){
-        if(root==null){
-            arr.add(-1);
-            return;
+        if(left.val!=right.val){
+            return false;
         }
-        arr.add(root.val);
-        righttrav(root.right,arr);
-        righttrav(root.left,arr);
+        return symmetric(left.left,right.right)&&symmetric(left.right,right.left);
     }
 }
