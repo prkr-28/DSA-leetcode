@@ -1,18 +1,10 @@
 class Solution {
     public int maximumCount(int[] nums) {
-        int n=nums.length;
-        int pos=0;
-        int neg=0;
-        for(int i=0;i<n;i++){
-            if(nums[i]>0){
-                pos++;
-            }
-            else if(nums[i]<0){
-                neg++;
-            }else{
-                continue;
-            }
-        }
-        return Math.max(pos,neg);
+        IntPredicate lambdap=num->num>0;
+         IntPredicate lambdan=num->num<0;
+        int pos=(int)Arrays.stream(nums).filter(lambdap).count();
+        int neg=(int)Arrays.stream(nums).filter(lambdan).count();
+
+         return Math.max(pos,neg);
     }
 }
