@@ -9,11 +9,10 @@ class Solution {
             diffarray[l]-=1;
             diffarray[r+1]+=1;
         }
-        for(int i=1;i<diffarray.length;i++){
-            diffarray[i]=diffarray[i-1]+diffarray[i];
-        }
+        int temp=0;
         for(int i=0;i<n;i++){
-            if(nums[i]+diffarray[i]>0){
+            temp+=diffarray[i];
+            if(temp+nums[i]>0){
                 return false;
             }
         }
