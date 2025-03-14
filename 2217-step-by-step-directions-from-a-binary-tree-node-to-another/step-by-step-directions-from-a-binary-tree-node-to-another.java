@@ -14,33 +14,40 @@
  * }
  */
 class Solution {
-    public TreeNode lowestcommonancestor(TreeNode root,int p,int q){
-        if(root==null||root.val==p||root.val==q){
-            return root;
-        }
-        TreeNode findleft=lowestcommonancestor(root.left,p,q);
-        TreeNode findright=lowestcommonancestor(root.right,p,q);
-        if(findleft==null){
-            return findright;
-        }
-        if(findright==null){
-            return findleft;
-        }
-        return root;
-    }
+    // public TreeNode lowestcommonancestor(TreeNode root,int p,int q){
+    //     if(root==null||root.val==p||root.val==q){
+    //         return root;
+    //     }
+    //     TreeNode findleft=lowestcommonancestor(root.left,p,q);
+    //     TreeNode findright=lowestcommonancestor(root.right,p,q);
+    //     if(findleft==null){
+    //         return findright;
+    //     }
+    //     if(findright==null){
+    //         return findleft;
+    //     }
+    //     return root;
+    // }
     public String getDirections(TreeNode root, int startValue, int destValue) {
-        TreeNode lca=lowestcommonancestor(root,startValue,destValue);
+        //TreeNode lca=lowestcommonancestor(root,startValue,destValue);
         StringBuilder sbleft=new StringBuilder();
         StringBuilder sbright=new StringBuilder();
+        StringBuilder result=new StringBuilder();
 
-        getpath(lca,startValue,sbleft);
-        getpath(lca,destValue,sbright);
+        getpath(root,startValue,sbleft);
+        getpath(root,destValue,sbright);
 
-        for(int i=0;i<sbleft.length();i++){
-            sbleft.setCharAt(i,'U');
+        int ptr=0;
+        while(ptr<sbleft.length()&&ptr<sbright.length()&&sbleft.charAt(ptr)==sbright.charAt(ptr)){
+            ptr++;
         }
-        sbleft.append(sbright);
-        return sbleft.toString();
+        for(int i=ptr;i<sbleft.length();i++){
+            result.append('U');
+        }
+        for(int i=ptr;i<sbright.length();i++){
+            result.append(sbright.charAt(i));
+        }
+        return result.toString();
     }
     public boolean getpath(TreeNode lca,int target,StringBuilder sb){
         if(lca==null){
