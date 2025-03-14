@@ -29,6 +29,9 @@ class Solution {
         long count=0;
         for(int j=0;j<candies.length;j++){
             k-=candies[j]/mid;
+            if(k==0){
+                return true;
+            }
         }
         return k<=0?true:false;
     }
