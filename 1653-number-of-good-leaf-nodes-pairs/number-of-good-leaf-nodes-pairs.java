@@ -22,7 +22,7 @@ class Solution {
     public ArrayList<Integer>solve(TreeNode root,int dis){
         if(root==null){
             ArrayList<Integer>emptylist=new ArrayList<>();
-            emptylist.add(0);
+            // emptylist.add(0);
             return emptylist;
         }
         if(root.left==null&&root.right==null){
@@ -35,20 +35,20 @@ class Solution {
 
         for(int l:ldist){
             for(int r:rdist){
-                if((l!=0&&r!=0)&&l+r<=dis){
+                if(l+r<=dis){
                     count++;
                 }
             }
         }
         ArrayList<Integer>currdistances=new ArrayList<>();
         for(int l:ldist){
-            if(l!=0&&l+1<=dis){
+            if(l+1<=dis){
                 currdistances.add(l+1);
             }
         }
 
         for(int r:rdist){
-            if(r!=0&&r+1<=dis){
+            if(r+1<=dis){
                 currdistances.add(r+1);
             }
         }
