@@ -14,63 +14,44 @@
  * }
  */
 class Solution {
-
-    public void makegraph(TreeNode root,TreeNode parent,Map<TreeNode,ArrayList<TreeNode>>map, Set<TreeNode>set){
+    int count=0;
+    public int countPairs(TreeNode root,int distance) {
+        solve(root,distance);
+        return count;
+    }
+    public ArrayList<Integer>solve(TreeNode root,int dis){
         if(root==null){
-            return;
+            ArrayList<Integer>emptylist=new ArrayList<>();
+            emptylist.add(0);
+            return emptylist;
         }
         if(root.left==null&&root.right==null){
-            set.add(root);
+            ArrayList<Integer>leaflist=new ArrayList<>();
+            leaflist.add(1);
+            return leaflist;
         }
-        if(parent==null){
-            map.put(root,new ArrayList<>());
-            if(root.left!=null){
-                map.get(root).add(root.left);
-            }
-            if(root.right!=null){
-                map.get(root).add(root.right);
-            }
-        }else{
-            map.put(root,new ArrayList<>());
-            map.get(root).add(parent);
-            if(root.left!=null){
-                map.get(root).add(root.left);
-            }
-            if(root.right!=null){
-                map.get(root).add(root.right);
-            }
-        }
-        makegraph(root.left,root,map,set);
-        makegraph(root.right,root,map,set);
-    }
+        ArrayList<Integer>ldist=solve(root.left,dis);
+        ArrayList<Integer>rdist=solve(root.right,dis);
 
-    public int countPairs(TreeNode root, int distance) {
-        Map<TreeNode,ArrayList<TreeNode>>map=new HashMap<>();
-        Set<TreeNode>set=new HashSet<>();
-        makegraph(root,null,map,set);
-
-        int count=0;
-        for(TreeNode n:set){
-            Queue<TreeNode>q=new LinkedList<>();
-            Set<TreeNode>visited=new HashSet<>();
-            q.add(n);
-            visited.add(n);
-            for(int level=0;level<=distance;level++){
-                int  sz=q.size();
-                while(sz-- >0){
-                    TreeNode tmp=q.poll();
-                    if(tmp!=n&&set.contains(tmp)){
-                        count++;
-                    }
-                    for(TreeNode tmps:map.get(tmp)){
-                        if(!visited.contains(tmps)){
-                            q.add(tmps);
-                            visited.add(tmps);
-                        }
-                    }
+        for(int l:ldist){
+            for(int r:rdist){
+                if((l!=0&&r!=0)&&l+r<=dis){
+                    count++;
                 }
             }
         }
-        return count/2;
+        ArrayList<Integer>currdistances=new ArrayList<>();
+        for(int l:ldist){
+            if(l!=0&&l+1<=dis){
+                currdistances.add(l+1);
+            }
+        }
+
+        for(int r:rdist){
+            if(r!=0&&r+1<=dis){
+                currdistances.add(r+1);
+            }
+        }
+        return currdistances;
     }
 }
