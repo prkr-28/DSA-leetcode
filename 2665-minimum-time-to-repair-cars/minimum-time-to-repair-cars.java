@@ -1,7 +1,11 @@
 class Solution {
     public long repairCars(int[] ranks, int cars) {
+        long max=-1;
+        for(int num:ranks){
+            max=Math.max(num,max);
+        }
         long si=0;
-        long ei=(long)1e14;
+        long ei=(long)(max*cars*cars);
         while(si<=ei){
             long mid=si+(ei-si)/2;
             if(isthis_timeSufficient(ranks,cars,mid)){
