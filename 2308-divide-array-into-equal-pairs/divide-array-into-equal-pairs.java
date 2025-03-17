@@ -9,11 +9,10 @@ class Solution {
         int count=0;
         for(int i:map.keySet()){
             int temp=map.get(i);
-            count+=temp/2;
+            if(temp%2!=0){
+                return false;
+            }
         }
-        if(count==n){
-            return true;
-        }
-        return false;
+        return true;
     }
 }
