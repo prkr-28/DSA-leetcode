@@ -1,30 +1,19 @@
 class Solution {
     public int minOperations(int[] nums) {
-        int i=0;
-        int j=0;
-        int opr=0;
+        int ans=0;
         int n=nums.length;
-        while(j<n){
-            int temp=0;
-            boolean p=false;
-            if(nums[j]==0){
-                temp=j;
-                while(j+3<=n&&temp<j+3){
-                    nums[temp]=(nums[temp]==1)?0:1;
-                    temp++;
-                    p=true;
-                }
-                if(p){
-                    opr++;
-                }
+        for(int i=0;i<n-2;i++){
+            if(nums[i]==1){
+                continue;
             }
-            j++;
-        }
-        for(int num:nums){
-            if(num==0){
-                return -1;
+            for(int j=i;j<=i+2;j++){
+                nums[j]^=1;
             }
+            ans++;
         }
-        return opr;
+        if(nums[n-1]==0||nums[n-2]==0){
+            return -1;
+        }
+        return ans;
     }
 }
