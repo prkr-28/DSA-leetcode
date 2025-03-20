@@ -18,12 +18,12 @@ class Nodevalues{
     int maxsum;
     int maxnode;
     int minnode;
-    boolean isbst;
-    public Nodevalues(int a,int b,int c,boolean d){
+    // boolean isbst;
+    public Nodevalues(int a,int b,int c){
         this.maxsum=a;
         this.maxnode=b;
         this.minnode=c;
-        this.isbst=d;
+        // this.isbst=d;
     }
 }
 class Solution {
@@ -34,15 +34,15 @@ class Solution {
     }
     public Nodevalues solve(TreeNode root){
         if(root==null){
-            return new Nodevalues(0,Integer.MIN_VALUE,Integer.MAX_VALUE,true);
+            return new Nodevalues(0,Integer.MIN_VALUE,Integer.MAX_VALUE);
         }
         Nodevalues leftv=solve(root.left);
         Nodevalues rightv=solve(root.right);
-        if(leftv.isbst==true&&rightv.isbst==true&&leftv.maxnode<root.val&&root.val<rightv.minnode){
+        if(leftv.maxnode<root.val&&root.val<rightv.minnode){
             maxsum=Math.max(maxsum,leftv.maxsum+rightv.maxsum+root.val);
-            return new Nodevalues(leftv.maxsum+rightv.maxsum+root.val,Math.max(root.val,rightv.maxnode),Math.min(root.val,leftv.minnode),true);
+            return new Nodevalues(leftv.maxsum+rightv.maxsum+root.val,Math.max(root.val,rightv.maxnode),Math.min(root.val,leftv.minnode));
         }
 
-        return new Nodevalues(Math.max(leftv.maxsum,rightv.maxsum),Integer.MAX_VALUE,Integer.MIN_VALUE,false);
+        return new Nodevalues(Math.max(leftv.maxsum,rightv.maxsum),Integer.MAX_VALUE,Integer.MIN_VALUE);
     }
 }
