@@ -13,32 +13,28 @@
  *     }
  * }
  */
+// o(1) space and o(h) complexity soln...
 class BSTIterator {
 
-    ArrayList<Integer>arr=new ArrayList<>();
-    int i=0;
+    Stack<TreeNode>st=new Stack<>();
     public BSTIterator(TreeNode root) {
-        inorder(root);
+        construct(root);
     }
     
     public int next() {
-        return arr.get(i++);
+        TreeNode temp=st.pop();
+        construct(temp.right);
+        return temp.val;
     }
     
     public boolean hasNext() {
-        if(i<arr.size()){
-            return true;
-        }
-        return false;
+        return st.isEmpty()?false:true;
     }
-
-    public void inorder(TreeNode root){
-        if(root==null){
-            return;
+    public void construct(TreeNode root){
+        while(root!=null){
+            st.push(root);
+            root=root.left;
         }
-        inorder(root.left);
-        arr.add(root.val);
-        inorder(root.right);
     }
 }
 
