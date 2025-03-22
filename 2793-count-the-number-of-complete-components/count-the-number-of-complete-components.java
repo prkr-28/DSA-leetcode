@@ -17,7 +17,7 @@ class Solution {
             }
             int[] info=new int[2];
             Arrays.fill(info,0);
-            dfs(i,map,visited,info);
+            bfs(i,map,visited,info);
 
             int edge=info[1];
             if((info[0]*(info[0]-1))==edge){
@@ -26,13 +26,19 @@ class Solution {
         }
         return res;
     }
-    public void dfs(int i,HashMap<Integer,ArrayList<Integer>>map,boolean[] visited,int[] info){
+    public void bfs(int i,HashMap<Integer,ArrayList<Integer>>map,boolean[] visited,int[] info)  {
+        Queue<Integer>q=new LinkedList<>();
+        q.add(i);
         visited[i]=true;
-        info[0]++;
-        info[1]+=map.getOrDefault(i,new ArrayList<>()).size();
-        for(int nbr:map.getOrDefault(i,new ArrayList<>())){
-            if(!visited[nbr]){
-                dfs(nbr,map,visited,info);
+        while(!q.isEmpty()){
+            int temp=q.poll();
+            info[0]++;
+            info[1]+=map.getOrDefault(temp,new ArrayList<>()).size();
+            for(int nbr:map.getOrDefault(temp,new ArrayList<>())){
+                if(!visited[nbr]){
+                    q.add(nbr);
+                    visited[nbr]=true;
+                }
             }
         }
     }
