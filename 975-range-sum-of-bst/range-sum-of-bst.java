@@ -23,10 +23,14 @@ class Solution {
         if(root==null){
             return;
         }
-        inorder(root.left,l,h);
+        if(root.val>l){
+            inorder(root.left,l,h);
+        }
         if(root.val>=l&&root.val<=h){
             res+=root.val;
         }
-        inorder(root.right,l,h);
+        if(root.val<h){
+            inorder(root.right,l,h);
+        }
     }
 }
