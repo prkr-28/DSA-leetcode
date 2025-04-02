@@ -8,8 +8,8 @@ class Solution {
         for(String s:words){
             res.append(findword(s,set)).append(" ");
         }
-        res.deleteCharAt(res.length()-1);
-        return res.toString();
+        //res.deleteCharAt(res.length()-1);
+        return res.toString().trim();
     }
 
     public String findword(String s,Set<String>set){
