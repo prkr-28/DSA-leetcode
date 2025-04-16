@@ -1,30 +1,35 @@
-class Pair{
-    int value;
-    int row;
-    int col;
-    public Pair(int v,int r,int c){
-        this.value=v;
-        this.row=r;
-        this.col=c;
-    }
-}
 class Solution {
     public int kthSmallest(int[][] matrix, int k) {
         int n=matrix.length;
-        PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)->Integer.compare(a.value,b.value));
-        for(int i=0;i<Math.min(n,k);i++){
-            pq.add(new Pair(matrix[i][0],i,0));
-        }
-
-        for(int i=0;i<k-1;i++){
-            Pair tmp=pq.poll();
-            int val=tmp.value;
-            int r=tmp.row;
-            int c=tmp.col;
-            if(c+1<n){
-                pq.add(new Pair(matrix[r][c+1],r,c+1));
+        int si=matrix[0][0];
+        int ei=matrix[n-1][n-1];;
+        while(si<=ei){
+            int mid=si+(ei-si)/2;
+            if(countsmaller(mid,matrix)<=k-1){
+                si=mid+1;
+            }
+            else{
+                ei=mid-1;
             }
         }
-        return pq.poll().value;
+        return si;
+    }
+    public int countsmaller(int target,int[][] matrix){
+        int totalcount=0;
+        for(int i=0;i<matrix.length;i++){
+            int si=0;
+            int ei=matrix[i].length-1;
+            while(si<=ei){
+                int mid=si+(ei-si)/2;
+                if(matrix[i][mid]<=target){
+                    si=mid+1;
+                }
+                else{
+                    ei=mid-1;
+                }
+            }
+            totalcount+=si;
+        }
+        return totalcount;
     }
 }
