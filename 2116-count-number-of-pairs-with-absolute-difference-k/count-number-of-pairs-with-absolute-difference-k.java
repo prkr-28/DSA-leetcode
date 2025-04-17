@@ -5,7 +5,7 @@ class Solution {
         for(int num:nums){
             freqarr[num]++;
         }
-        for(int i=1;i<freqarr.length-k;i++){
+        for(int i=1;i<101-k;i++){
             res+=freqarr[i]*freqarr[i+k];
         }
         return res;
