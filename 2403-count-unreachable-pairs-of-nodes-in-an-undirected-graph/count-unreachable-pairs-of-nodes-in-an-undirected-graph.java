@@ -1,47 +1,59 @@
 class Solution {
-    long count;
+    int[] parent;
+    int[] rank;
+    public int find(int i){
+        if(i==parent[i]){
+            return i;
+        }
+        return parent[i]=find(parent[i]);
+    }
+    public void union(int x,int y){
+        int x_parent=find(x);
+        int y_parent=find(y);
+        if(x_parent==y_parent){
+            return;
+        }
+        if(rank[x_parent]>rank[y_parent]){
+            parent[y_parent]=x_parent;
+        }
+        else if(rank[x_parent]<rank[y_parent]){
+            parent[x_parent]=y_parent;
+        }
+        else{
+            parent[y_parent]=x_parent;
+            rank[x_parent]++;
+        }
+    }
     public long countPairs(int n, int[][] edges) {
-        count=0;
-        Map<Integer,ArrayList<Integer>>graph=new HashMap<>();
+        parent=new int[n];
+        rank=new int[n];
+        for(int i=0;i<n;i++){
+            parent[i]=i;
+        }
         for(int[] arr:edges){
             int u=arr[0];
             int v=arr[1];
-            
-            graph.putIfAbsent(u,new ArrayList<>());
-            graph.putIfAbsent(v,new ArrayList<>());
-            
-            graph.get(u).add(v);
-            graph.get(v).add(u);
+
+            if(find(u)==find(v)){
+                continue;
+            }
+            else{
+                union(u,v);
+            }
         }
 
-        boolean[] visited=new boolean[n];
-        long temp=n;
-        long res=0;
+        Map<Long,Long>map=new HashMap<>();
         for(int i=0;i<n;i++){
-            if(!visited[i]){
-                bfs(graph,i,visited);
-                res+=count*(temp-count);
-                temp=temp-count;
-                count=0;
-            }
+            long parent=find(i);
+            map.put(parent,map.getOrDefault(parent,0L)+1);
+        }
+
+        long res=0;
+        long temp=n;
+        for(long i:map.keySet()){
+            res+=map.get(i)*(temp-map.get(i));
+            temp=temp-map.get(i);
         }
         return res;
-    }
-
-    public void bfs(Map<Integer,ArrayList<Integer>>graph,int u,boolean[] visited){
-        Queue<Integer>q=new LinkedList<>();
-        q.add(u);
-        visited[u]=true;
-        count++;
-        while(!q.isEmpty()){
-            int temp=q.poll();
-            for(int v:graph.getOrDefault(temp,new ArrayList<>())){
-                if(!visited[v]){
-                    visited[v]=true;
-                    q.add(v);
-                    count++;
-                }
-            }
-        }
     }
 }
