@@ -9,8 +9,8 @@ class Solution {
         return parent[i]=find(parent[i]);
     }
     public void union(int x,int y){
-        int x_parent=parent[x];
-        int y_parent=parent[y];
+        int x_parent=find(x);
+        int y_parent=find(y);
         if(x_parent==y_parent){
             return;
         }
