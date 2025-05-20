@@ -6,8 +6,8 @@ class Solution {
         for(int i=0;i<m;i++){
             int l=queries[i][0];
             int r=queries[i][1];
-            diffarray[l]-=1;
-            diffarray[r+1]+=1;
+            diffarray[l]+=-1;
+            diffarray[r+1]-=-1;
         }
         int temp=0;
         for(int i=0;i<n;i++){
