@@ -1,11 +1,3 @@
-class Pair{
-    int wt;
-    int v;
-    public Pair(int w,int v){
-        this.wt=w;
-        this.v=v;
-    }
-}
 class Solution {
     int[] parent;
     int rank[];
